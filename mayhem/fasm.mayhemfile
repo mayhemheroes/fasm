@@ -1,0 +1,5 @@
+project: fasm
+target: fasm
+
+cmds:
+  - cmd: /fasm -m 50000 -s /dev/null @@ /dev/null
