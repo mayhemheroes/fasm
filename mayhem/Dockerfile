@@ -1,5 +1,5 @@
 # Build Stage
-FROM debian:buster as builder
+FROM debian:bullseye AS builder
 
 RUN apt update && apt install -y fasm python3
 
@@ -11,6 +11,6 @@ RUN python3 mayhem/lower.py && \
     fasm -m 1000000 source/linux/x64/fasm.asm /fasm && chmod +x /fasm
 
 # Package Stage
-FROM debian:buster
+FROM debian:bullseye
 
 COPY --from=builder /fasm /

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 import os
+import shutil
 
-for (root, dirs, files) in os.walk('.', topdown=True):
+for (root, dirs, files) in os.walk(".", topdown=True):
     print(f"ROOT: {root}")
-    if '.git' in dirs:
+    if ".git" in dirs:
         print("removing .git")
-        dirs.remove('.git')
+        dirs.remove(".git")
 
     # lowercase all files
     print(f"files: {files}")
@@ -15,7 +16,7 @@ for (root, dirs, files) in os.walk('.', topdown=True):
             print(f"passing: {file}")
             continue
         print(f"renaming: {file} -> {file.lower()}")
-        os.rename(os.path.join(root, file), os.path.join(root, file.lower()))
+        shutil.move(os.path.join(root, file), os.path.join(root, file.lower()))
 
     lowers = list()
     toremove = list()
@@ -27,10 +28,10 @@ for (root, dirs, files) in os.walk('.', topdown=True):
             print(f"passing: {dir}")
             continue
         print(f"renaming: {dir} -> {dir.lower()}")
-        os.rename(os.path.join(root, dir), os.path.join(root, dir.lower()))
+        shutil.move(os.path.join(root, dir), os.path.join(root, dir.lower()))
         lowers.append(dir.lower())
         toremove.append(dir)
-    
+
     for rm in toremove:
         print(f"removing {rm}")
         dirs.remove(rm)
